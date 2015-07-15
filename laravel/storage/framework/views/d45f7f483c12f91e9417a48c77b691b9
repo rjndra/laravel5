@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html class="bg-black">
+    <head>
+        <meta charset="UTF-8">
+        <title>Laravel</title>
+        <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+        
+     
+        <link href="dist/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="dist/font-awesome.min.css" rel="stylesheet" type="text/css" />
+        <!-- Theme style -->
+        <link href="dist/template.css" rel="stylesheet" type="text/css" />
+
+        
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+          <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+    </head>
+<body class="bg-white">
+<div >
+	<div  class="col-lg-3">
+		<li><p type="button" id="add_doc" class="btn btn-default btn-block">Add Documents</p></li>
+		<li><p type="button" id="list_doc" class="btn btn-default btn-block">List Documents</p></li>
+	</div>
+		
+	<div class="col-lg-9">
+	<div id = "list_document" class="box">
+		<div class="box-header">
+                <h3 class="box-title">List Documents</h3>
+        </div><!-- /.box-header -->
+
+		<div class="box-body table-responsive no-padding">
+			
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th width = "5%">SN</th>
+                        <th width="25%">Title</th>
+						<th>Documents</th>
+						<th>Created Date</th>
+						<th width = "5%">Edit</th>
+                        <th width = "5%">Delete</th>
+                    </tr>
+                </thead>
+									
+				<tbody>
+					<tr data-row="8">
+						<td>1</td>
+						<td>Doucment 1</td>
+						<td>5</td>
+						<td>2015-7-15/a></td>
+						<td>
+							<button name="edit" data-record="8" type="button" id="catid_8" class="btn btn-info btn-circle" data-toggle="modal"  data-target="#myModaledit"><i class="fa fa-edit"></i>
+							</button>
+						</td>
+						<td>
+							<a href="pages/category/confirm_delete.php?id=8&&deleteme=yes" class="ico del btn btn-danger btn-circle" onclick="return confirm('Are You Sure to Delete ?');"><i class="fa fa-times"></i></a>
+                        </td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	</div>
+</div>
+
+        <script src="dist/jquery.min.js"></script>
+        
+    </body>
