@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Request;
+use Document;
 
 class DocumentController extends Controller
 {
@@ -14,11 +15,13 @@ class DocumentController extends Controller
      *
      * @return Response
      */
+
     public function index()
     {
-        //
+        
+        $documents = \App\Document::all();
 
-        return view('document.index');
+        return view('document.index', compact('documents'));
     }
 
     /**
@@ -26,10 +29,10 @@ class DocumentController extends Controller
      *
      * @return Response
      */
+
     public function create()
     {
-        //
-        return view('document.add');
+        return view('document.create');
     }
 
     /**
@@ -38,9 +41,20 @@ class DocumentController extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function store(Request $request)
+
+    public function store()
     {
-        //
+        // $this->validate($request, ['title' => 'required|min:6', 'body' => 'required']);
+        
+        // 
+
+        $input = Request::all();
+
+        \App\Document::create($input);
+
+        return redirect('document');
+
+       //  return redirect('documents');
     }
 
     /**
@@ -49,10 +63,13 @@ class DocumentController extends Controller
      * @param  int  $id
      * @return Response
      */
+
     public function show($id)
     {
-        //
-        return view('document.view');
+        $document = \App\Document::FindOrFail($id);
+
+        return view('document.show', compact('document'));
+
     }
 
     /**
@@ -61,9 +78,10 @@ class DocumentController extends Controller
      * @param  int  $id
      * @return Response
      */
+
     public function edit($id)
     {
-        //
+
     }
 
     /**
@@ -73,9 +91,13 @@ class DocumentController extends Controller
      * @param  int  $id
      * @return Response
      */
+
     public function update(Request $request, $id)
     {
-        //
+        $document = Document::FindOrFail($id);
+        $document->update($request->all());
+
+        return redirect('document');
     }
 
     /**
