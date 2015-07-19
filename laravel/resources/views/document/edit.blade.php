@@ -1,8 +1,7 @@
-
 @extends('app')
 @section('title')
 
-        <title>Add Documents</title>
+        <title>Edit Documents</title>
 
 @stop
 @section('content')
@@ -14,26 +13,20 @@
 </div>
 
 <div class="col-sm-8">
-{!! Form::open( ['url'=>'document']) !!}
-<div class="form-js">
+{!! Form::model($document,  ['method'=>'PATCH', 'action'=>['DocumentController@update', $document->id]]) !!}
 	<div class="form-group">
 		{!! Form::label('tilte', 'Title: ') !!}
 		{!! Form::text('title', null, ['class'=> 'form-control']) !!}
 	</div>
 
-	 <!-- File Uplaod area  -->
+	 <!-- text area  -->
 	<div class="form-group">
-		{!! Form::label('afile[]', 'Upload File / Files : ') !!}
-		{!! Form::file('afile[]', null, ['class'=> 'form-control']) !!}
-	<a name="add" class="add_field_button">
-        <i class="btn fa fa-plus-circle" style="color:green"></i>
-    </a>
+		{!! Form::label('Body', 'Body: ') !!}
+		{!! Form::textarea('body', null, ['class'=> 'form-control']) !!}
 	</div>
 
-	
-</div>
 	<div class="form-group">
-		{!! Form::submit('Add Documents', ['class'=> 'btn btn-success form-control']) !!}
+		{!! Form::submit('Add Article', ['class'=> 'btn btn-success form-control']) !!}
 	</div>
 {!! Form::close() !!}
 
@@ -46,8 +39,8 @@
 
 @endif
 </div>
-@stop
 
-@section('footer')
-	{!! Html::script('dist/js/addfiles.js') !!} 
+
+
+
 @stop

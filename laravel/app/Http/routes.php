@@ -17,5 +17,7 @@ Route::get('/', function () {
 
 Route::resource('users', 'UserController');
 
-Route::resource('document', 'DocumentController');
+// Route::resource('document', 'DocumentController');
+
+Route::resource('document', 'FileController');
 

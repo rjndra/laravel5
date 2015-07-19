@@ -2,14 +2,13 @@
 <html class="bg-black">
     <head>
         <meta charset="UTF-8">
-        <title>Document</title>
+        
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
        
-        {!! Html::style('css/bootstrap.min.css') !!} 
-        {!! Html::style('css/font-awesome.min.css') !!} 
+        {!! Html::style('dist/css/bootstrap.min.css') !!} 
+        {!! Html::style('dist/css/font-awesome.min.css') !!} 
         <!-- Theme style -->
-        {!! Html::style('css/template.css') !!} 
-
+        @yield('title')
         
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -22,9 +21,10 @@
     	
     	@yield('content')
 
-        {!! Html::script('js/jquery.min.js') !!} 
-        {!! Html::script('js/bootstrap.min.js') !!}
+        {!! Html::script('dist/js/jquery.min.js') !!} 
+        {!! Html::script('dist/js/bootstrap.min.js') !!}
 
+        @yield('footer')
 	</body>
     
 </html>

@@ -13,4 +13,6 @@ class Document extends Model
     	'title',
     	'body'
     ];
+
+
 }

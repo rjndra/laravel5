@@ -44,17 +44,14 @@ class DocumentController extends Controller
 
     public function store()
     {
-        // $this->validate($request, ['title' => 'required|min:6', 'body' => 'required']);
-        
-        // 
+       
+        $request = Request::all();
 
-        $input = Request::all();
+        // $this->validate($request);
 
-        \App\Document::create($input);
+        \App\Document::create($request);
 
         return redirect('document');
-
-       //  return redirect('documents');
     }
 
     /**
@@ -81,7 +78,9 @@ class DocumentController extends Controller
 
     public function edit($id)
     {
+        $document = \App\Document::FindOrFail($id);
 
+        return view('document.edit', compact('document'));
     }
 
     /**
@@ -92,10 +91,12 @@ class DocumentController extends Controller
      * @return Response
      */
 
-    public function update(Request $request, $id)
+    public function update($id)
     {
-        $document = Document::FindOrFail($id);
-        $document->update($request->all());
+        $request = Request::all();
+
+        $document = \App\Document::FindOrFail($id);
+        $document->update($request);
 
         return redirect('document');
     }
@@ -108,6 +109,9 @@ class DocumentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $document = \App\Document::FindOrFail($id);
+        $document->delete();
+
+        return redirect('document');    
     }
 }

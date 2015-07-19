@@ -1,5 +1,12 @@
 @extends('app')
 
+@section('title')
+
+        <title>Sign In|Users</title>
+        {!! Html::style('dist/css/template.css') !!} 
+
+@stop
+
 @section('content')
 
 <div class="form-box" id="login-box">
