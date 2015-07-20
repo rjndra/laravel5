@@ -1,107 +1,38 @@
-<?php
-
-namespace App\Http\Controllers;
-
-
+<?php namespace App\Http\Controllers;
 
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
-use Request;
+
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class FileController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
+    
     public function index()
     {
     	$files = $this->getAllData();
         return view('document.index', compact('files'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
+    
     public function create()
     {
         return view('document.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  Request  $request
-     * @return Response
-     */
-    public function store()
+    public function store(Request $request)
     {
-        $request = Request::all();
+        
+        $name = $request->input('title');
+        echo $name;
+        $file = $request->file('afile');
 
-		$this->create_entry($request);
+        $data= array('title'=>$name, 'afile'=>$file);
+
+		$this->create_entry($data);
 
         return redirect('document');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        $file = FileAction::getDataById($id);
-
-        return view('document.show', compact('file'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        $file = FileAction::getDataById($id);
-
-        return view('document.edit', compact('file'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  Request  $request
-     * @param  int  $id
-     * @return Response
-     */
-    public function update($id)
-    {
-        $request = Request::all();
-
-        $file = FileAction::getDataById($id);
-        // $file->update($request);
-
-        return redirect('document');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-    	
-    	$file = FileAction::getDataById($id);
-        // $document->delete();
-
-        return redirect('document');    
     }
 
 
@@ -110,14 +41,15 @@ class FileController extends Controller
 		if (isset($data)) {
 			$album_name=1;
 			$album_name = $this->create_album($album_name);
-			print_r($data['afile']);
 			$files = sizeof($data['afile']);
+            $x=0;
 		}
 
 
 		for ($i=0; $i<$files; $i++){
 
-			$filename[$i]=$data['afile'][$i];
+            $x++;
+			$filename[$i]="file".$x.".txt";
 			$temporary_location[$i]=$data['afile'][$i];
 
 			$permanent_location = $album_name.'/'.$filename[$i];

@@ -2,23 +2,26 @@
 
 namespace App;
 
-class FileAction
+use Illuminate\Database\Eloquent\Model;
+
+class FileAction extends Model
 {
   
 	public function create_entry($data){
 
-		if (isset($_FILES)) {
+		if (isset($data)) {
 			$album_name=1;
 			$album_name = $this->create_album($album_name);
-			$files = sizeof($_FILES['afile']['name']);
+			print_r($data['afile']);
+			$files = sizeof($data['afile']);
 		}
 
 
 		for ($i=0; $i<$files; $i++){
 
-			$filename[$i]=$_FILES['afile']['name'][$i];
-			$filesize[$i]=$_FILES['afile']['size'][$i];
-			$temporary_location[$i]=$_FILES['afile']['tmp_name'][$i];
+			$filename[$i]=$data['afile'][$i];
+			$temporary_location[$i]=$data['afile'][$i];
+            echo $temporary_location[$i];
 
 			$permanent_location = $album_name.'/'.$filename[$i];
 			$filenames[] = $filename[$i];
@@ -26,9 +29,9 @@ class FileAction
 
 		}
 
-		if (isset($_POST['title'])){
+		if (isset($data['title'])){
 
-			$title = $_POST['title'];
+			$title = $data['title'];
 			date_default_timezone_set("Asia/Kathmandu"); 
 			$created_at = date("Y-M-d H:i:s");
 
@@ -47,7 +50,7 @@ class FileAction
 		} else {
 
 			$album_name++;	
-			$album_name = create_album($album_name);
+			$album_name = $this->create_album($album_name);
 			return $album_name;
 		}
 
@@ -60,10 +63,16 @@ class FileAction
 	    $data = json_decode($meta,true);
 	    
 	    // Get last id
-		$last_item    = end($data);
-		$last_item_id = $last_item['id'];
+	    if (!is_null($data)){
+			$last_item   = end($data);
+			$last_item_id = $last_item['id'];
+			$id = ++$last_item_id;
+		} else {
+			$id = 1;
+		}
+		
 
-		$id = ++$last_item_id;
+		
 		$location = $album_name;
 
 	    $data[] = array('id'=>$id, 'title' => $title, 'nof' => $files, 'files'=> $filenames, 'location'=>$location , 'created_at' => $created_at);
