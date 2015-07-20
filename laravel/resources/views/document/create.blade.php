@@ -5,6 +5,7 @@
         <title>Add Documents</title>
 
 @stop
+@section('content')
 
 <div class="col-sm-3">
 	<h2><a class="btn btn-success"  href="{{ url('document') }}">List Documents</a></h2>
